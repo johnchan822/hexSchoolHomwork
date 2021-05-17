@@ -115,7 +115,7 @@ checkNumber(){
           let id  = e.target.dataset.id;
           axios.delete(`${this.data.url}/api/${this.data.path}/admin/product/${id}`)
           .then(res => {
-            alert(`已刪除以商品${this.data.category}`)
+            alert(`已刪除以商品${this.dataArray.category}`)
             // console.log(res);
             this.init();
           })
