@@ -252,6 +252,10 @@
         productModal.show();
       } else if (isNew === 'edit') {
         this.tempProduct = { ...item };
+          //如果原始只有一張圖編輯後增加圖
+        if (this.tempProduct.imagesUrl == undefined){
+          this.tempProduct.imagesUrl =[];
+        }
         this.isNew = false;
         productModal.show();
       } else if (isNew === 'delete') {
@@ -281,8 +285,8 @@
           .then((res) => {
             console.log(res);
             alert(res.data.message);
-            productModal.hide();
             this.getData();
+            productModal.hide();
           })
           .catch((err) => {
             console.log(err)
