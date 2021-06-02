@@ -81,7 +81,7 @@ body {
         },
         methods: {
         },
-        template:`  <form id="form" class="form-signin" @sumbit.prevent="$emit('emit-user',userInfo)">
+        template:`  <form id="form" class="form-signin" @submit.prevent="$emit('emit-user',userInfo)">
             <div class="form-floating mb-3">
               <input type="email" class="form-control" id="username" placeholder="name@example.com" required autofocus v-model="userInfo.username">
               <label for="username">Email address</label>
@@ -113,11 +113,11 @@ body {
           axios.post(`${this.url}/admin/signin`,userInfo)
           .then((res)=>{
             console.log(res)
+       if(res.data.success === true){
             const token = res.data.token;
             const  expired =res.data.expired;
             document.cookie = `hexToken=${token};expires=${new Date(expired)}` //夾帶token資料與到期時間資料
             alert(`${res.data.message}`)
-            if(res.data.success === true){
               window.location='products.html'
             }
             else{
