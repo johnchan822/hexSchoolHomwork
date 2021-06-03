@@ -7,6 +7,31 @@ export default {
     createImages() {
       this.tempProduct.imagesUrl = ['']
     },
+    //送出資料採用參數的方式帶入
+    productStates(tempProduct) {
+      let methods;
+      let id;
+      if (this.isNew == true) {
+        methods = 'post';
+        id = '';
+      }
+      if (this.isNew == false) {
+        id = `/${tempProduct.id}`
+        methods = 'put';
+      }
+        axios[methods](`${url}/api/${api}/admin/product${id}`, { data: tempProduct })
+        .then((res) => {
+          alert(res.data.message)
+          productModalSample.hide();
+          this.getData();
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+  },
+  mounted() {
+  
   },
   //點選頁碼切換頁面 內部觸發傳到外部    $emit-page item 點選後帶出頁碼往外傳
   template: ` <div id="productModal" ref="productModal" class="modal fade" tabindex="-1" aria-labelledby="productModalLabel"
@@ -108,7 +133,7 @@ export default {
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
               取消
             </button>
-            <button type="button" class="btn btn-primary" @click="$emit('update-item', tempProduct)">
+            <button type="button" class="btn btn-primary" @click="productStates(tempProduct)">
               確認
             </button>
           </div>
