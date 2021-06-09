@@ -11,7 +11,7 @@ Object.keys(VeeValidateRules).forEach(rule => {
   }
 });
 
-VeeValidateI18n.loadLocaleFromURL('./zh_TW.json');
+VeeValidateI18n.loadLocaleFromURL('zh_TW.json');
 // Activate the locale
 VeeValidate.configure({
   generateMessage: VeeValidateI18n.localize('zh_TW'),
